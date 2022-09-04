@@ -38,7 +38,8 @@ depends=(
   "python2-cairo"
 )
 makedepends=(
-  "git")
+  "git"
+)
 provides=(
   "pygobject2-devel=$pkgver-$pkgrel"
 )
@@ -55,13 +56,12 @@ sha512sums=(
   "29efccbfe998f8ad461111b6a4ed65f39f621c700ad4047602dc94de3dfd95927d71cab9b13f6bdfaa984fd0e0864c0c4f604516bb283cf00421190b2d3d2d22"
 )
 
-
 prepare() {
 
   cd "${_relname}-PYGOBJECT_2_28_6"
 
-find . \( -name '*.py' -o -name '*.py.in' \) -exec sed -i '1s|python$|&2|' {} +
-  
+  find . \( -name '*.py' -o -name '*.py.in' \) -exec sed -i '1s|python$|&2|' {} +
+
   autoreconf -fvi
 
 }
@@ -74,7 +74,7 @@ build() (
 
   ./configure --prefix=/usr --disable-introspection PYTHON=/usr/bin/python2
 
-   sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+  sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
   make
 )
